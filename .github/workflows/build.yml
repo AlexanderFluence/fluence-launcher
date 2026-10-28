@@ -1,6 +1,9 @@
 name: Compilar APK
 on:
   push:
+    paths-ignore:
+      - "FluenceLite/**"
+      - ".github/workflows/build-lite.yml"
   workflow_dispatch:
 permissions:
   contents: write
