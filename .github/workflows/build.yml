@@ -13,17 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: unzip -q FluenceLauncher.zip
-      - name: Modelo de voz en español (sin internet)
-        run: |
-          curl -sSL --retry 3 -o model.zip https://alphacephei.com/vosk/models/vosk-model-small-es-0.42.zip
-          unzip -q model.zip
-          mkdir -p FluenceLauncher/app/src/main/assets
-          mv vosk-model-small-es-0.42 FluenceLauncher/app/src/main/assets/model-es
-          echo "es-0.42" > FluenceLauncher/app/src/main/assets/model-es/uuid
-          ls -R FluenceLauncher/app/src/main/assets/model-es | head -30
-          W=$(find FluenceLauncher/app/src/main/assets/model-es -name words.txt | head -1)
-          echo "words: $W"
-          for w in oye hola copiloto carro auto; do printf "VOCAB %s: " "$w"; grep -c "^$w " "$W" || true; done
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
