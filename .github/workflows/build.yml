@@ -21,9 +21,13 @@ jobs:
         working-directory: FluenceLauncher
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
-      - run: cp FluenceLauncher/app/build/outputs/apk/debug/app-debug.apk FluenceLauncher.apk
+          ./gradlew assembleRadioDebug assemblePhoneDebug --no-daemon
+      - run: |
+          cp FluenceLauncher/app/build/outputs/apk/radio/debug/app-radio-debug.apk FluenceLauncher.apk
+          cp FluenceLauncher/app/build/outputs/apk/phone/debug/app-phone-debug.apk FluenceDrive.apk
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.${{ github.run_number }}
-          files: FluenceLauncher.apk
+          files: |
+            FluenceLauncher.apk
+            FluenceDrive.apk
